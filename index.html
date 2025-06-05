@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Atuwa's Kitchen</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- Remix Icon -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.1.0/fonts/remixicon.css" rel="stylesheet" />
+    <!-- Animate.css for animation effects -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@4.1.1/animate.min.css"/>
+    <!-- ScrollReveal JS -->
+    <script src="https://unpkg.com/scrollreveal"></script>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Montserrat:wght@700;900&family=Playfair+Display:wght@700;900&family=DM+Sans:wght@400;700&family=Dancing+Script:wght@700&display=swap');
+      body {
+        background: #fcf7f3;
+        color: #2d1e19;
+        font-family: 'DM Sans', 'Inter', Arial, sans-serif;
+        font-size: 1.07rem;
+      }
+      h1, h2, h3, h4, h5, h6, .section__header {
+        color: #43271c;
+        font-family: 'Playfair Display', 'Montserrat', serif;
+        font-weight: 900;
+        letter-spacing: 1.2px;
+      }
+      .navbar, .footer, .card, .modal-content, .bg-card {
+        background: #fff !important;
+        color: #2d1e19 !important;
+      }
+      .navbar {
+        box-shadow: 0 1.5px 20px 0 #e36d2a13;
+        padding: 0.7rem 0;
+      }
+      .navbar .navbar-brand span {
+        color: #e36d2a;
+      }
+      .navbar .navbar-brand {
+        color: #493226;
+        font-size: 2rem;
+        font-family: 'Dancing Script', cursive;
+        font-weight: bold;
+      }
+      .navbar .navbar-logo-img {
+        width: 60px;
+        height: 60px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-right: 0.6rem;
+        box-shadow: 0 2px 16px #e36d2a22;
+        border: 1.5px solid #e36d2a22;
+      }
+      @media (max-width: 500px) {
+        .navbar .navbar-logo-img {
+          width: 40px;
+          height: 40px;
+        }
+      }
+      .navbar-nav .nav-link {
+        color: #493226 !important;
+        font-weight: 700;
+        font-family: 'Montserrat', Arial, sans-serif;
+        letter-spacing: .2px;
+        transition: color .18s;
+      }
+      .navbar-nav .nav-link.active, .navbar-nav .nav-link:hover {
+        color: #e36d2a !important;
+        text-shadow: 0 1px 6px #e36d2a15;
+      }
+      .btn-main, .btn-main:focus {
+        background: #e36d2a;
+        color: #fff !important;
+        font-weight: 800;
+        font-family: 'Montserrat', Arial, sans-serif;
+        border: none;
+        border-radius: 2rem;
+        transition: background 0.18s, color 0.18s, box-shadow 0.18s, transform 0.22s;
+        box-shadow: 0 2px 12px #e36d2a33;
+        font-size: 1.13rem;
+        letter-spacing: .4px;
+      }
+      .btn-main:hover, .btn-main:focus-visible {
+        background: #43271c;
+        color: #fff !important;
+        transform: translateY(-2px) scale(1.06);
+        box-shadow: 0 6px 22px #e36d2a33;
+      }
+      .btn-outline-main, .btn-outline-main:focus {
+        border: 2px solid #e36d2a;
+        color: #e36d2a !important;
+        background: transparent;
+        font-weight: 700;
+        font-family: 'Montserrat', Arial, sans-serif;
+        border-radius: 2rem;
+        transition: background 0.18s, color 0.18s, border 0.18s;
+      }
+      .btn-outline-main:hover, .btn-outline-main:focus-visible {
+        background: #e36d2a;
+        color: #fff !important;
+        border-color: #43271c;
+      }
+      .section__header {
+        font-size: 2.2rem;
+        color: #43271c;
+        text-shadow: 0 1px 8px #e36d2a19;
+        font-family: 'Playfair Display', serif;
+      }
+      .section__description {
+        color: #493226;
+        font-size: 1.15rem;
+        font-family: 'DM Sans', Arial, sans-serif;
+        margin-bottom: 0.7rem;
+      }
+
+      /* Specials Cards - Clean, No Gradient, Image Fitted with Margin */
+      .special__card {
+        border-radius: 1.5rem;
+        box-shadow: 0 8px 36px 0 #e36d2a13, 0 2px 8px #e36d2a10;
+        border: 1.5px solid #f3e0cf;
+        background: #fff;
+        color: #2d1e19;
+        font-family: 'DM Sans', Arial, sans-serif;
+        transition: border 0.23s, box-shadow 0.23s, transform 0.23s;
+        position: relative;
+        overflow: hidden;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 2.2rem 1.2rem 1.7rem 1.2rem;
+        min-height: 380px;
+        box-sizing: border-box;
+      }
+      .special__card:hover {
+        transform: translateY(-11px) scale(1.045) rotate(-1deg);
+        border: 2.5px solid #e36d2a;
+        box-shadow: 0 16px 40px #e36d2a38, 0 2px 12px #e36d2a1e;
+        background: #fffef9;
+        z-index: 2;
+      }
+      .special__card img {
+        width: 114px;
+        height: 114px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-bottom: 1.1rem;
+        margin-top: 1.1rem; /* Add margin from top of card */
+        border: 3px solid #e36d2a;
+        background: #f2e5da;
+        box-shadow: 0 4px 20px #e36d2a1a;
+        transition: box-shadow 0.18s, border 0.18s;
+        display: block;
+      }
+      .special__card:hover img {
+        box-shadow: 0 12px 30px #e36d2a4a;
+        border: 3.5px solid #43271c;
+      }
+      .special__card h4 {
+        color: #e36d2a;
+        font-family: 'Dancing Script', cursive;
+        font-weight: 900;
+        letter-spacing: 1.5px;
+        font-size: 1.23rem;
+        margin-top: .23rem;
+        margin-bottom: .4rem;
+        text-align: center;
+        min-height: 30px;
+      }
+      .special__card p {
+        color: #493226;
+        font-size: 1.03rem;
+        margin-bottom: 1.1rem;
+        text-align: center;
+        min-height: 38px;
+        font-family: 'DM Sans', Arial, sans-serif;
+        flex: 1 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .special__card .btn {
+        font-size: 1.04rem;
+        font-family: 'Montserrat', Arial, sans-serif;
+        font-weight: 700;
+        margin-top: 0.6rem;
+      }
+      .special__card .badge {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        background: #e36d2a;
+        color: #fff;
+        font-family: 'Montserrat', Arial, sans-serif;
+        border-radius: 1rem;
+        font-size: .95rem;
+        padding: 0.38em 1em;
+        letter-spacing: 0.5px;
+        font-weight: 700;
+        box-shadow: 0 2px 8px #e36d2a44;
+        z-index: 3;
+        border: none;
+      }
+
+      .about__img {
+        width: 240px;
+        max-width: 98vw;
+        border-radius: 1.3rem;
+        box-shadow: 0 4px 28px #e36d2a11;
+        border: 2px solid #f3e0cf;
+      }
+      .ceo__img {
+        width: 140px;
+        height: 140px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 3px solid #e36d2a;
+        background: #f2e5da;
+        margin-bottom: 1.1rem;
+        box-shadow: 0 2px 14px #e36d2a33;
+      }
+      .ceo__title i {
+        color: #e36d2a;
+        font-size: 1.6rem;
+      }
+      .ceo__skills li {
+        color: #e36d2a;
+        font-weight: 700;
+        font-family: 'Montserrat', Arial, sans-serif;
+        letter-spacing: 0.2px;
+        font-size: 1.07rem;
+      }
+      .client__card {
+        background: #fff;
+        border-radius: 1.1rem;
+        color: #2d1e19;
+        padding: 1.5rem 1.2rem;
+        box-shadow: 0 8px 24px 0 #e36d2a22;
+        border: 1.5px solid #f3e0cf;
+        max-width: 400px;
+        margin: 0 auto;
+        font-family: 'DM Sans', Arial, sans-serif;
+        position: relative;
+        overflow: hidden;
+        min-height: 260px;
+      }
+      .client__card img {
+        width: 64px;
+        height: 64px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin: 0.6rem auto 0.4rem auto;
+        display: block;
+        box-shadow: 0 0 10px #e36d2a22;
+        border: 2px solid #e36d2a33;
+      }
+      .client__card h4 {
+        color: #43271c;
+        font-family: 'Playfair Display', serif;
+        font-weight: 700;
+        letter-spacing: 1px;
+      }
+      .client__card h5 {
+        color: #e36d2a;
+        font-size: 1rem;
+      }
+      .footer {
+        background: #fcf7f3 !important;
+        color: #493226;
+        padding-top: 2.7rem;
+        font-family: 'DM Sans', Arial, sans-serif;
+      }
+      .footer__brand span {
+        color: #e36d2a;
+      }
+      .footer__logo-img {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        object-fit: cover;
+      }
+      .footer__bar {
+        background: #fff;
+        color: #e36d2a;
+        text-align: center;
+        padding: 0.8rem 0;
+        font-size: 1rem;
+      }
+      .modal-content {
+        border-radius: 1.1rem;
+        box-shadow: 0 3px 24px 0 #e36d2a22;
+        color: #2d1e19;
+        font-family: 'DM Sans', Arial, sans-serif;
+        background: #fff !important;
+      }
+      .modal-header {
+        border-bottom: none;
+      }
+      .modal-footer {
+        border-top: none;
+      }
+      .modal__img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-bottom: 1rem;
+        border: 2.5px solid #e36d2a;
+      }
+      .form-label {
+        color: #e36d2a;
+        font-weight: 700;
+        letter-spacing: .5px;
+        font-family: 'Montserrat', Arial, sans-serif;
+      }
+      .form-control, textarea.form-control {
+        background: #f8efe7;
+        border: 1.5px solid #e36d2a;
+        color: #2d1e19 !important;
+        border-radius: 0.5rem;
+        font-size: 1.05rem;
+        font-family: 'DM Sans', Arial, sans-serif;
+        font-weight: 500;
+      }
+      .form-control:focus {
+        border-color: #e36d2a;
+        box-shadow: 0 0 0 2px #e36d2a33;
+      }
+      .bg-card { background: #fff !important; }
+      .text-accent { color: #e36d2a !important; }
+      .fw-bold { font-weight: 700 !important; }
+      /* Custom scrollbar for aesthetic */
+      ::-webkit-scrollbar {
+        width: 8px;
+        background: #f3e0cf;
+        border-radius: 16px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #e36d2a55;
+        border-radius: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- NAVIGATION -->
+    <!-- ... rest of your unchanged HTML ... -->
+    <!-- NAVIGATION -->
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top shadow-sm">
+      <div class="container">
+        <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+          <img src="./assets/logo.png" alt="Logo" class="navbar-logo-img" />
+          Atuwa's <span>Kitchen</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="mainNav">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a class="nav-link active" href="#home">Home</a></li>
+            <li class="nav-item"><a class="nav-link" href="#special">Specials</a></li>
+            <li class="nav-item"><a class="nav-link" href="#ceo">CEO</a></li>
+            <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+            <li class="nav-item"><a class="nav-link" href="#client">Testimonials</a></li>
+            <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          </ul>
+          <button class="btn btn-main ms-lg-3" data-bs-toggle="modal" data-bs-target="#orderModal">
+            <i class="ri-shopping-bag-fill"></i> Order
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="py-5" id="home">
+      <div class="container d-flex flex-column flex-lg-row align-items-center justify-content-between gap-4">
+        <div class="flex-grow-1 text-center text-lg-start reveal">
+          <h1 class="display-4 mb-3 fw-bold" style="color: #43271c; font-family:'Playfair Display', serif;">
+            Discover <span style="color: #e36d2a;font-family:'Dancing Script',cursive;font-size:3.2rem;">Real Taste</span>
+            <br />
+            of <span style="color: #493226;font-family:'Dancing Script',cursive;font-size:3.2rem;">Snacks & Pastries</span>
+          </h1>
+          <p class="lead section__description mb-4 animate__animated animate__fadeInUp">
+            Freshly crafted, always delightful. Dive into our world of delicious snacks, treats, and smiles.
+          </p>
+          <div class="d-flex flex-column flex-sm-row gap-3 justify-content-center justify-content-lg-start">
+            <button class="btn btn-main px-4 animate__animated animate__pulse animate__delay-1s" data-bs-toggle="modal" data-bs-target="#orderModal">
+              Order Now <i class="ri-arrow-right-line"></i>
+            </button>
+            <button class="btn btn-outline-main px-4 animate__animated animate__pulse animate__delay-2s" data-bs-toggle="modal" data-bs-target="#contactModal">
+              Contact Us
+            </button>
+          </div>
+        </div>
+        <div class="flex-grow-1 text-center reveal">
+          <img src="./assets/header.png" alt="Atuwa's Kitchen Hero" class="img-fluid rounded-4 shadow animate__animated animate__zoomIn" style="max-width: 420px;" />
+        </div>
+      </div>
+    </header>
+
+    <!-- SPECIALS SECTION -->
+    <section class="container py-5" id="special">
+      <h2 class="section__header text-center reveal">Our Special Treats</h2>
+      <p class="section__description text-center mb-4 reveal">
+        Explore our bestsellers – made daily, always delicious!
+      </p>
+      <div class="row g-4">
+        <!-- SPECIAL CARD TEMPLATE -->
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 reveal">
+          <div class="special__card p-4 h-100 animate__animated animate__fadeInUp">
+            <span class="badge animate__animated animate__bounceInDown">Best Seller</span>
+            <img src="./assets/filled-donut.jpg" alt="Filled Donut" />
+            <h4>Filled Donut</h4>
+            <p>Fluffy, creamy, and irresistible.</p>
+            <button class="btn btn-main w-100 animate__animated animate__pulse animate__delay-1s" data-bs-toggle="modal" data-bs-target="#filledDonutModal">View</button>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 reveal">
+          <div class="special__card p-4 h-100 animate__animated animate__fadeInUp">
+            <img src="./assets/glazed-donut.jpg" alt="Glazed Donut" />
+            <h4>Glazed Donut</h4>
+            <p>Classic, sweet, and glossy.</p>
+            <button class="btn btn-main w-100 animate__animated animate__pulse animate__delay-1s" data-bs-toggle="modal" data-bs-target="#glazedDonutModal">View</button>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 reveal">
+          <div class="special__card p-4 h-100 animate__animated animate__fadeInUp">
+            <img src="./assets/banana-bread.jpg" alt="Banana Bread" />
+            <h4>Banana Bread</h4>
+            <p>Moist, aromatic banana delight.</p>
+            <button class="btn btn-main w-100 animate__animated animate__pulse animate__delay-1s" data-bs-toggle="modal" data-bs-target="#bananaBreadModal">View</button>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 reveal">
+          <div class="special__card p-4 h-100 animate__animated animate__fadeInUp">
+            <img src="./assets/shawarma.jpg" alt="Shawarma" />
+            <h4>Shawarma</h4>
+            <p>Juicy, savory, and packed with flavor.</p>
+            <button class="btn btn-main w-100 animate__animated animate__pulse animate__delay-1s" data-bs-toggle="modal" data-bs-target="#shawarmaModal">View</button>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 reveal">
+          <div class="special__card p-4 h-100 animate__animated animate__fadeInUp">
+            <img src="./assets/meatpie.jpg" alt="Meatpie" />
+            <h4>Meatpie</h4>
+            <p>Golden pastry, rich meat filling.</p>
+            <button class="btn btn-main w-100 animate__animated animate__pulse animate__delay-1s" data-bs-toggle="modal" data-bs-target="#meatpieModal">View</button>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 reveal">
+          <div class="special__card p-4 h-100 animate__animated animate__fadeInUp">
+            <img src="./assets/samosa.jpg" alt="Samosa" />
+            <h4>Samosa</h4>
+            <p>Crispy triangles with spicy filling.</p>
+            <button class="btn btn-main w-100 animate__animated animate__pulse animate__delay-1s" data-bs-toggle="modal" data-bs-target="#samosaModal">View</button>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 reveal">
+          <div class="special__card p-4 h-100 animate__animated animate__fadeInUp">
+            <img src="./assets/spring-rolls.jpg" alt="Spring Rolls" />
+            <h4>Spring Rolls</h4>
+            <p>Light, crunchy, and veggie-loaded.</p>
+            <button class="btn btn-main w-100 animate__animated animate__pulse animate__delay-1s" data-bs-toggle="modal" data-bs-target="#springRollsModal">View</button>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 reveal">
+          <div class="special__card p-4 h-100 animate__animated animate__fadeInUp">
+            <img src="./assets/cupcakes.jpg" alt="Cupcakes" />
+            <h4>Cupcakes</h4>
+            <p>Soft, frosted, and fun-sized.</p>
+            <button class="btn btn-main w-100 animate__animated animate__pulse animate__delay-1s" data-bs-toggle="modal" data-bs-target="#cupcakesModal">View</button>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 reveal">
+          <div class="special__card p-4 h-100 animate__animated animate__fadeInUp">
+            <img src="./assets/yoghurt.jpg" alt="Yoghurt" />
+            <h4>Yoghurt</h4>
+            <p>Creamy, tangy, and refreshing.</p>
+            <button class="btn btn-main w-100 animate__animated animate__pulse animate__delay-1s" data-bs-toggle="modal" data-bs-target="#yoghurtModal">View</button>
+          </div>
+        </div>
+        <div class="col-12 col-sm-6 col-md-4 col-lg-3 reveal">
+          <div class="special__card p-4 h-100 animate__animated animate__fadeInUp">
+            <img src="./assets/cake-parfait.jpg" alt="Cake Parfait" />
+            <h4>Cake Parfait</h4>
+            <p>Layered dessert, pure bliss.</p>
+            <button class="btn btn-main w-100 animate__animated animate__pulse animate__delay-1s" data-bs-toggle="modal" data-bs-target="#cakeParfaitModal">View</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section class="py-5 bg-card" id="about">
+      <div class="container d-flex flex-column flex-lg-row align-items-center gap-4">
+        <div class="flex-grow-1 reveal">
+          <h2 class="mb-3">About Atuwa's Kitchen</h2>
+          <p>
+            Atuwa's Kitchen is your neighborhood destination for mouth-watering snacks and pastries. We blend tradition with creativity, using only the freshest ingredients to bring you treats you'll crave again and again.
+          </p>
+          <ul class="mt-3 ps-0" style="list-style:none;">
+            <li><i class="ri-check-double-line text-accent"></i> Freshly made every day</li>
+            <li><i class="ri-check-double-line text-accent"></i> Delivery across Tudun Matawalle & beyond</li>
+            <li><i class="ri-check-double-line text-accent"></i> Hygienic, home-style preparation</li>
+          </ul>
+        </div>
+        <div class="flex-grow-1 text-center reveal">
+          <img src="./assets/logo.jpg" alt="About Atuwa's Kitchen" class="about__img img-fluid animate__animated animate__zoomIn" />
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section class="container py-5" id="client">
+      <h2 class="section__header text-center reveal">What Our Customers Say</h2>
+      <div class="row justify-content-center mt-4 g-4">
+        <div class="col-12 col-md-6 col-lg-4 reveal">
+          <div class="client__card animate__animated animate__fadeInUp">
+            <p>
+              Atuwa's Kitchen is my favorite! Everything is fresh and tasty. The donuts are out of this world!
+            </p>
+            <img src="./assets/client1.jpg" alt="client" />
+            <h4>Fatima Bello</h4>
+            <h5>Entrepreneur</h5>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4 reveal">
+          <div class="client__card animate__animated animate__fadeInUp">
+            <p>
+              The shawarma is amazing and the delivery is always fast. Highly recommend to everyone in Katsina!
+            </p>
+            <img src="./assets/client2.jpg" alt="client" />
+            <h4>Sani Musa</h4>
+            <h5>Student</h5>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 col-lg-4 reveal">
+          <div class="client__card animate__animated animate__fadeInUp">
+            <p>
+              I love their cupcakes and parfaits. Atuwa's Kitchen never disappoints!
+            </p>
+            <img src="./assets/client3.jpg" alt="client" />
+            <h4>Zainab Umar</h4>
+            <h5>Event Planner</h5>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CEO SECTION -->
+    <section class="py-5 bg-card" id="ceo">
+      <div class="container d-flex flex-column flex-lg-row align-items-center gap-4">
+        <div class="flex-grow-1 text-center reveal">
+          <img src="./assets/ceo.png" alt="CEO Amina Muhammad" class="ceo__img animate__animated animate__fadeInLeft" />
+        </div>
+        <div class="flex-grow-1 reveal">
+          <h2 class="ceo__title d-flex align-items-center gap-2 mb-2">
+            <i class="ri-user-star-fill"></i> Meet Our CEO
+          </h2>
+          <h3 class="ceo__name" style="font-family:'Dancing Script',cursive;font-size:2.2rem;color:#e36d2a;">Amina Muhammad</h3>
+          <div class="ceo__role mb-3" style="font-size:1.1rem;font-weight:600;color:#493226;">
+            Founder & Head Chef
+          </div>
+          <p class="ceo__bio">
+            With a passion for culinary excellence and a decade of experience, <strong>Amina Muhammad</strong> leads Atuwa's Kitchen with creativity, love, and a commitment to authentic, delicious snacks. Her expertise in pastries, snacks, and service has made Atuwa's Kitchen a household name in Tudun Matawalle and beyond.
+          </p>
+          <ul class="ceo__skills d-flex gap-4 flex-wrap ps-0" style="list-style:none;">
+            <li><i class="ri-checkbox-circle-fill text-accent"></i> Pastry & Snacks Expert</li>
+            <li><i class="ri-checkbox-circle-fill text-accent"></i> Food Innovator</li>
+            <li><i class="ri-checkbox-circle-fill text-accent"></i> Community Builder</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer" id="contact">
+      <div class="container py-4">
+        <div class="row g-4">
+          <div class="col-12 col-lg-4">
+            <a href="#home" class="footer__brand d-flex align-items-center gap-2 mb-2 text-decoration-none fw-bold">
+              <img src="./assets/logo.png" alt="Logo" class="footer__logo-img" /> Atuwa's <span>Kitchen</span>
+            </a>
+            <p>
+              Delicious snacks and treats, baked fresh for Tudun Matawalle and beyond.
+            </p>
+            <div class="footer__contact mt-2">
+              <p><i class="ri-map-pin-2-fill"></i> Tudun Matawalle, behind Flour Mill, Rimi Street No. 14, Katsina</p>
+              <p><i class="ri-whatsapp-fill"></i> 07079841789</p>
+            </div>
+          </div>
+          <div class="col-6 col-lg-4">
+            <h4 class="mb-3">Quick Links</h4>
+            <ul class="list-unstyled">
+              <li><a href="#special" class="text-decoration-none">Specials</a></li>
+              <li><a href="#ceo" class="text-decoration-none">CEO</a></li>
+              <li><a href="#about" class="text-decoration-none">About</a></li>
+              <li><a href="#client" class="text-decoration-none">Testimonials</a></li>
+              <li><a href="#contact" class="text-decoration-none">Contact</a></li>
+            </ul>
+          </div>
+          <div class="col-6 col-lg-4">
+            <h4 class="mb-3">Get in Touch</h4>
+            <ul class="list-unstyled">
+              <li><a href="tel:07079841789" class="text-decoration-none">Call Us</a></li>
+              <li><a href="#" class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#contactModal">Contact Form</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer__bar">
+        &copy; 2025 Atuwa's Kitchen. All rights reserved.
+      </div>
+    </footer>
+
+    <!-- MODALS -->
+    <!-- Order Modal -->
+    <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-3">
+          <div class="modal-header border-0">
+            <h2 class="modal-title" id="orderModalLabel">Order Snacks</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form class="modal-body" id="orderForm">
+            <div class="mb-3">
+              <label for="order-name" class="form-label">Your Name</label>
+              <input type="text" class="form-control" id="order-name" required />
+            </div>
+            <div class="mb-3">
+              <label for="order-item" class="form-label">What would you like?</label>
+              <input type="text" class="form-control" id="order-item" required placeholder="E.g. 2 Meatpies, 1 Shawarma" />
+            </div>
+            <div class="mb-3">
+              <label for="order-phone" class="form-label">Phone Number</label>
+              <input type="tel" class="form-control" id="order-phone" required />
+            </div>
+            <button class="btn btn-main w-100" type="submit">Place Order</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Contact Modal -->
+    <div class="modal fade" id="contactModal" tabindex="-1" aria-labelledby="contactModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-3">
+          <div class="modal-header border-0">
+            <h2 class="modal-title" id="contactModalLabel">Contact Us</h2>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <form class="modal-body" id="contactForm">
+            <div class="mb-3">
+              <label for="contact-name" class="form-label">Your Name</label>
+              <input type="text" class="form-control" id="contact-name" required />
+            </div>
+            <div class="mb-3">
+              <label for="contact-message" class="form-label">Message</label>
+              <textarea class="form-control" id="contact-message" rows="4" required></textarea>
+            </div>
+            <button class="btn btn-main w-100" type="submit">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Product Modals -->
+    <div class="modal fade" id="filledDonutModal" tabindex="-1" aria-labelledby="filledDonutModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-3 text-center">
+          <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+          <img src="./assets/filled-donut.jpg" alt="Filled Donut" class="modal__img mx-auto mb-2" />
+          <h3 id="filledDonutModalLabel">Filled Donut</h3>
+          <p>Fluffy donut filled with sweet, creamy goodness. Perfect for tea time or as a treat anytime!</p>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="glazedDonutModal" tabindex="-1" aria-labelledby="glazedDonutModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-3 text-center">
+          <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+          <img src="./assets/glazed-donut.jpg" alt="Glazed Donut" class="modal__img mx-auto mb-2" />
+          <h3 id="glazedDonutModalLabel">Glazed Donut</h3>
+          <p>Classic donut with a beautiful, sweet glaze. Soft, fresh, and a favorite for all ages.</p>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="bananaBreadModal" tabindex="-1" aria-labelledby="bananaBreadModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-3 text-center">
+          <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+          <img src="./assets/banana-bread.jpg" alt="Banana Bread" class="modal__img mx-auto mb-2" />
+          <h3 id="bananaBreadModalLabel">Banana Bread</h3>
+          <p>Moist, aromatic banana bread baked to golden perfection. Comfort food at its finest!</p>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="shawarmaModal" tabindex="-1" aria-labelledby="shawarmaModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-3 text-center">
+          <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+          <img src="./assets/shawarma.jpg" alt="Shawarma" class="modal__img mx-auto mb-2" />
+          <h3 id="shawarmaModalLabel">Shawarma</h3>
+          <p>Juicy shawarma rolls filled with well-seasoned meat and veggies. A customer favorite!</p>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="meatpieModal" tabindex="-1" aria-labelledby="meatpieModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-3 text-center">
+          <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+          <img src="./assets/meatpie.jpg" alt="Meatpie" class="modal__img mx-auto mb-2" />
+          <h3 id="meatpieModalLabel">Meatpie</h3>
+          <p>Golden, flaky pastry stuffed with rich, savory meat filling. A classic Nigerian delight.</p>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="samosaModal" tabindex="-1" aria-labelledby="samosaModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-3 text-center">
+          <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+          <img src="./assets/samosa.jpg" alt="Samosa" class="modal__img mx-auto mb-2" />
+          <h3 id="samosaModalLabel">Samosa</h3>
+          <p>Crispy triangle pastry with a spicy, flavorful veggie filling. Perfect as a snack or starter.</p>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="springRollsModal" tabindex="-1" aria-labelledby="springRollsModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-3 text-center">
+          <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+          <img src="./assets/spring-rolls.jpg" alt="Spring Rolls" class="modal__img mx-auto mb-2" />
+          <h3 id="springRollsModalLabel">Spring Rolls</h3>
+          <p>Light, crunchy rolls packed with seasoned veggies. Deliciously addictive and perfect to share!</p>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="cupcakesModal" tabindex="-1" aria-labelledby="cupcakesModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-3 text-center">
+          <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+          <img src="./assets/cupcakes.jpg" alt="Cupcakes" class="modal__img mx-auto mb-2" />
+          <h3 id="cupcakesModalLabel">Cupcakes</h3>
+          <p>Soft, moist cupcakes topped with luscious frosting. Treat yourself or share with friends!</p>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="yoghurtModal" tabindex="-1" aria-labelledby="yoghurtModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-3 text-center">
+          <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+          <img src="./assets/yoghurt.jpg" alt="Yoghurt" class="modal__img mx-auto mb-2" />
+          <h3 id="yoghurtModalLabel">Yoghurt</h3>
+          <p>Creamy and tangy, our yoghurt is the perfect refreshment for any time of day.</p>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="cakeParfaitModal" tabindex="-1" aria-labelledby="cakeParfaitModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content p-3 text-center">
+          <button type="button" class="btn-close ms-auto" data-bs-dismiss="modal" aria-label="Close"></button>
+          <img src="./assets/cake-parfait.jpg" alt="Cake Parfait" class="modal__img mx-auto mb-2" />
+          <h3 id="cakeParfaitModalLabel">Cake Parfait</h3>
+          <p>Indulgent layers of cake, cream, and fruit. A decadent dessert for every sweet tooth.</p>
+        </div>
+      </div>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      // WhatsApp Order
+      document.getElementById('orderForm').onsubmit = function(e){
+        e.preventDefault();
+        const name = document.getElementById('order-name').value.trim();
+        const item = document.getElementById('order-item').value.trim();
+        const phone = document.getElementById('order-phone').value.trim();
+        const msg = encodeURIComponent(
+          `Order from Atuwa's Kitchen:\nName: ${name}\nOrder: ${item}\nPhone: ${phone}`
+        );
+        window.open("https://wa.me/2347079841789?text=" + msg, '_blank');
+        bootstrap.Modal.getOrCreateInstance(document.getElementById('orderModal')).hide();
+      };
+      // WhatsApp Contact
+      document.getElementById('contactForm').onsubmit = function(e){
+        e.preventDefault();
+        const name = document.getElementById('contact-name').value.trim();
+        const message = document.getElementById('contact-message').value.trim();
+        const msg = encodeURIComponent(
+          `Contact request from Atuwa's Kitchen website:\nName: ${name}\nMessage: ${message}`
+        );
+        window.open("https://wa.me/2347079841789?text=" + msg, '_blank');
+        bootstrap.Modal.getOrCreateInstance(document.getElementById('contactModal')).hide();
+      };
+
+      // Reveal on scroll
+      document.addEventListener('DOMContentLoaded', function() {
+        if (window.ScrollReveal) {
+          ScrollReveal().reveal('.reveal', {
+            duration: 900,
+            origin: 'bottom',
+            distance: '44px',
+            delay: 90,
+            interval: 120,
+            reset: false,
+            easing: 'cubic-bezier(0.5, 0, 0, 1)',
+            mobile: true
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
